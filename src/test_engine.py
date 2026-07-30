@@ -127,7 +127,7 @@ class TestEngine:
 
             results.append({
                 "test": test_name,
-                "passed": passed,
+                "status": "passed" if passed else "failed",
                 "possible": test_marks,
                 "earned": test_marks if passed else 0
             })

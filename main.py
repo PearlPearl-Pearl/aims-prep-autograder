@@ -3,10 +3,12 @@ import argparse
 
 from src.submissions_manager import get_submissions
 from src.test_engine import TestEngine
+from src.results_manager import ResultsManager
 
 
 SUBMISSIONS_DIR = Path("submissions")
 ASSIGNMENTS_DIR = Path("assignments")
+RESULTS_DIR = Path("results")
 
 
 def main():
@@ -32,6 +34,10 @@ def main():
         assignments_dir=ASSIGNMENTS_DIR
     )
 
+    results_manager = ResultsManager(
+        results_dir=RESULTS_DIR
+    )
+
     for submission in submissions:
 
         print(
@@ -51,6 +57,11 @@ def main():
             assignment_code=submission["assignment"]
         )
 
+        result["identifier"] = submission["identifier"]
+        result["assignment"] = submission["assignment"]
+
+        results_manager.save_result(result)
+
         print(result["stdout"])
 
         if result["stderr"]:
@@ -62,6 +73,9 @@ def main():
             f"{result['objective_score']}/"
             f"{result['total_marks']}"
         )
+
+        print("\nSaved result:")
+        print(result)
 
 
 if __name__ == "__main__":

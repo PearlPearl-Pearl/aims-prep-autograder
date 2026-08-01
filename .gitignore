@@ -3,3 +3,7 @@ submissions/*
 assignments/*
 *cache*
 results/*
+.env
+pythonweek1
+send.py
+feedback/*

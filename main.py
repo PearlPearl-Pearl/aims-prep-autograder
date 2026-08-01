@@ -4,11 +4,13 @@ import argparse
 from src.submissions_manager import get_submissions
 from src.test_engine import TestEngine
 from src.results_manager import ResultsManager
+from src.feedback_generator import FeedbackGenerator
 
 
 SUBMISSIONS_DIR = Path("submissions")
 ASSIGNMENTS_DIR = Path("assignments")
 RESULTS_DIR = Path("results")
+FEEDBACK_DIR = Path("feedback")
 
 
 def main():
@@ -38,6 +40,11 @@ def main():
         results_dir=RESULTS_DIR
     )
 
+    feedback_generator = FeedbackGenerator(
+        assignments_dir=ASSIGNMENTS_DIR,
+        feedback_dir=FEEDBACK_DIR
+    )
+
     for submission in submissions:
 
         print(
@@ -60,7 +67,16 @@ def main():
         result["identifier"] = submission["identifier"]
         result["assignment"] = submission["assignment"]
 
+        # Save instructor result
         results_manager.save_result(result)
+        results_manager.update_summary(result)
+
+        # Generate student feedback
+        feedback_file = feedback_generator.save_feedback(
+            identifier=submission["identifier"],
+            assignment_code=submission["assignment"],
+            result=result
+        )
 
         print(result["stdout"])
 
@@ -74,8 +90,9 @@ def main():
             f"{result['total_marks']}"
         )
 
-        print("\nSaved result:")
-        print(result)
+        print(
+            f"Feedback saved: {feedback_file}"
+        )
 
 
 if __name__ == "__main__":

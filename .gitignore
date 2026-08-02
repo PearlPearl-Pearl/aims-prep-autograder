@@ -1,9 +1,32 @@
+# Student / sensitive data
 emails.csv
-submissions/*
-assignments/*
-*cache*
-results/*
+submissions/
+results/
+feedback/
+
+# Assignment-specific / local configuration
+assignments/
+
+# Environment / credentials
 .env
-pythonweek1
+
+# Local scripts / cohort-specific files
+pythonweek1/
 send.py
-feedback/*
+
+# Python generated files
+__pycache__/
+*.py[cod]
+
+# Testing / tooling caches
+.pytest_cache/
+.cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

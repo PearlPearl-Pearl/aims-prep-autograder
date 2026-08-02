@@ -234,7 +234,7 @@ class FeedbackGenerator:
 
         feedback_file = (
             assignment_dir
-            / f"{identifier}.txt"
+            / f"{identifier}_{assignment_code}.txt"
         )
 
         feedback_text = self.generate_feedback_text(
@@ -249,35 +249,3 @@ class FeedbackGenerator:
         )
 
         return feedback_file
-
-
-
-
-if __name__ == "__main__":
-
-    from src.test_engine import TestEngine
-
-    generator = FeedbackGenerator(
-        assignments_dir=Path("assignments"),
-        feedback_dir=Path("feedback")
-    )
-
-    engine = TestEngine(
-        assignments_dir=Path("assignments")
-    )
-
-    result = engine.run_tests(
-        notebook_path=Path(
-            "submissions",
-            "millicent_ayantoya_PP1.ipynb"
-        ),
-        assignment_code="PP1"
-    )
-
-    feedback_file = generator.save_feedback(
-        identifier="millicent_ayantoya",
-        assignment_code="PP1",
-        result=result
-    )
-
-    print(f"Feedback saved to: {feedback_file}")

@@ -135,29 +135,29 @@ class TestEngine:
         return results
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    engine = TestEngine(
-        assignments_dir=Path("..", "assignments")
-    )
+#     engine = TestEngine(
+#         assignments_dir=Path("..", "assignments")
+#     )
 
-    result = engine.run_tests(
-        notebook_path=Path(
-            "..",
-            "submissions",
-            "pearl_kuuridong_PP1.ipynb"
-        ),
-        assignment_code="PP1"
-    )
+#     result = engine.run_tests(
+#         notebook_path=Path(
+#             "..",
+#             "submissions",
+#             "pearl_kuuridong_PP1.ipynb"
+#         ),
+#         assignment_code="PP1"
+#     )
 
-    for test in result["tests"]:
-        print(
-            f"{test['test']}: "
-            f"{test['earned']}/{test['possible']}"
-        )
+#     for test in result["tests"]:
+#         print(
+#             f"{test['test']}: "
+#             f"{test['earned']}/{test['possible']}"
+#         )
 
-    print(
-        f"\nObjective score: "
-        f"{result['objective_score']}/"
-        f"{result['total_marks']}"
-    )
+#     print(
+#         f"\nObjective score: "
+#         f"{result['objective_score']}/"
+#         f"{result['total_marks']}"
+#     )
